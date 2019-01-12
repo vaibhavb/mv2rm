@@ -1,0 +1,20 @@
+.model Lights
+.inputs Button
+.outputs CarSignal PedestrianSignal
+.subckt ControlLogic CL PresentSignal=CarSignal Button=Button NextSignal=Tmp
+.latch Tmp CarSignal
+.reset CarSignal
+0
+1
+.table CarSignal -> PedestrianSignal
+0 1
+1 0
+.end
+
+.model ControlLogic
+.inputs PresentSignal Button
+.outputs NextSignal
+.table PresentSignal Button -> NextSignal
+.def 1
+1 1 0
+.end
